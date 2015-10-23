@@ -2,8 +2,12 @@
 # -*- coding: utf-8 -*-
 
 import argparse
-import redis
 import sys
+try:
+    import redis
+except ImportError:
+    print("Import error redis: pip install redis")
+    sys.exit(2)
 
 VERSION = 0.1
 
@@ -175,7 +179,7 @@ if __name__ == '__main__':
         _list = args._list
         if not _list:
             print("Error! Enter the list name.")
-            sys.exit(3)
+            sys.exit(2)
         result = r.llen(_list)
         check_queue_list(
             result,
